@@ -103,10 +103,10 @@ def graph(n, signal1, signal2, name1, name2):
     plt.grid()
     plt.show()
 
-# graph(n_range, y_1_values, y_2_values, 'y[n]', 'y2[n]')
+graph(n_range, y_1_values, y_2_values, 'y[n]', 'y2[n]')
 
 # # Graficando en la misma figura las señales s[n] y t[n]
-# graph(n_range, s_values, t_values, 's[n]', 't[n]')
+graph(n_range, s_values, t_values, 's[n]', 't[n]')
 
 ######################### REPASO PANDAS #########################
 # Se importa la librería Pandas con el pseudónimo pd.
