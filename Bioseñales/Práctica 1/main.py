@@ -112,6 +112,41 @@ graph(n_range, s_values, t_values, 's[n]', 't[n]')
 # Se importa la librería Pandas con el pseudónimo pd.
 import pandas as pd
 
+# Función que recibe diccionario con las notas de los alumnos de 
+# un curso y devuelve una seria con la nota mínima, máxima, media
+# y la desbviación típica.
+
+# Se crea diccionario con las notas de los alumnos.
+notas = {
+    'Alumno1': [4.5, 3.2, 4.8],
+    'Alumno2': [3.8, 4.0, 4.5],
+    'Alumno3': [4.0, 3.5, 4.2],
+    'Alumno4': [2.5, 3.0, 3.5],
+    'Alumno5': [4.2, 4.5, 4.8],
+}
+
+def notas_estadisticas(notas):
+    # Se crea un DataFrame a partir del diccionario de notas.
+    df = pd.DataFrame(notas)
+
+    # Se calculan las estadísticas.
+    min_nota = df.min()
+    max_nota = df.max()
+    mean_nota = df.mean()
+    std_nota = df.std()
+
+    # Se crea un nuevo DataFrame con las estadísticas.
+    estadisticas = pd.DataFrame({
+        'Mínima': min_nota,
+        'Máxima': max_nota,
+        'Media': mean_nota,
+        'Desviación Típica': std_nota
+    })
+
+    return estadisticas
+
+print(f"Estadísticas de las notas de los alumnos:\n{notas_estadisticas(notas)}")
+
 # Se cargan los datos desde "datos.csv" en un DataFrame.
 data = pd.read_csv("datos.csv", sep=";", header=0)
 
@@ -124,7 +159,11 @@ print("Últimas filas del DataFrame:\n", data.tail())
 data = data.drop("Unnamed: 0", axis=1)
 
 # Calcular el IMC con la formula IMC = peso(kg) / altura(m)^2,
-# conociendo que la altura se entrega en cm.
+
+# Intercambiando los datos de las columnas "Weight" y "Height".
+data["Weight"], data["Height"] = data["Height"], data["Weight"]
+
+# Conociendo que la altura se entrega en cm.
 IMC = data["Weight"] / (data["Height"]/100)**2
 
 # Agregando el IMC como nueva columna llamda "BMI".
